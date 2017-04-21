@@ -1,0 +1,1825 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-gsm-modem/node_modules/gsm-modem/pdu.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-gsm-modem">npmtest-gsm-modem (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-gsm-modem/node_modules/gsm-modem/pdu.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">6.52% <small>(21 / 322)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 130)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">6.6% <small>(21 / 318)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-gsm-modem/node_modules/gsm-modem/</a> » pdu.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//TODO: make 8-bit encoding
+&nbsp;
+var pduParser = {};
+&nbsp;
+var sevenBitDefault = new Array('@', '£', '$', '¥', 'è', 'é', 'ù', 'ì', 'ò', 'Ç', '\n', 'Ø', 'ø', '\r','Å', 'å','\u0394', '_', '\u03a6', '\u0393', '\u039b', '\u03a9', '\u03a0','\u03a8', '\u03a3', '\u0398', '\u039e','\x1b', 'Æ', 'æ', 'ß', 'É', ' ', '!', '"', '#', '¤', '%', '&amp;', '\'', '(', ')','*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7','8', '9', ':', ';', '&lt;', '=', '&gt;', '?', '¡', 'A', 'B', 'C', 'D', 'E','F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S','T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ä', 'Ö', 'Ñ', 'Ü', '§', '¿', 'a','b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o','p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'ö', 'ñ','ü', 'à');
+var sevenBitEsc = new Array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '^', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '{', '}', '', '', '', '', '', '\\', '', '', '', '', '', '', '', '', '', '', '', '', '[', '~', ']',
+    '', '|', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '€', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+&nbsp;
+//http://en.wikipedia.org/wiki/GSM_03.40
+//http://smsconnexion.wordpress.com/2009/02/12/sms-pdu-formats-demystified/
+pduParser.parse = <span class="fstat-no" title="function not covered">function(pdu) {</span>
+    //Cursor points to the last octet we've read.
+<span class="cstat-no" title="statement not covered">    var cursor = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var obj = parseSMSCPart (pdu);</span>
+<span class="cstat-no" title="statement not covered">    obj.smsc_tpdu = pdu;</span>
+<span class="cstat-no" title="statement not covered">    cursor += obj.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var buffer = new Buffer(pdu.slice(cursor,cursor+6), 'hex');</span>
+<span class="cstat-no" title="statement not covered">    cursor += 6;</span>
+<span class="cstat-no" title="statement not covered">    var smsDeliver = parseInt(buffer[0]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var smsDeliverBits = ("00000000"+parseInt(smsDeliver).toString(2)).slice(-8);</span>
+<span class="cstat-no" title="statement not covered">    var tp_mti = smsDeliverBits.slice(-2);</span>
+<span class="cstat-no" title="statement not covered">    obj.tpdu_type = TP_MTI_To_String (tp_mti);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (tp_mti=='10'){ //SMS-STATUS-REPORT</span>
+<span class="cstat-no" title="statement not covered">    	return this.parseStatusReport (pdu.slice(cursor-6), obj);</span>
+    }
+<span class="cstat-no" title="statement not covered">    var udhi =  smsDeliverBits.slice(1,2) === "1";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var senderSize = buffer[1];</span>
+<span class="cstat-no" title="statement not covered">    if(senderSize % 2 === 1)</span>
+<span class="cstat-no" title="statement not covered">        senderSize++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.sender_type = parseInt(buffer[2]).toString(16);</span>
+<span class="cstat-no" title="statement not covered">    if (obj.sender_type === 'd0') {</span>
+<span class="cstat-no" title="statement not covered">        obj.sender = this.decode7Bit(pdu.slice(cursor, cursor+senderSize), Math.floor(senderSize*4/7)).trim();</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        obj.sender = pduParser.deSwapNibbles(pdu.slice(cursor, cursor+senderSize));</span>
+    }
+<span class="cstat-no" title="statement not covered">    cursor += senderSize;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var protocolIdentifier = pdu.slice(cursor, cursor+2);</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var dataCodingScheme = pdu.slice(cursor, cursor+2);</span>
+<span class="cstat-no" title="statement not covered">    cursor = cursor+2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.dcs = parseInt(dataCodingScheme, 16);</span>
+<span class="cstat-no" title="statement not covered">    obj.encoding = pduParser.detectEncoding(dataCodingScheme);</span>
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.time = parseTS (pdu.slice(cursor, cursor+14));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    cursor += 14;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var dataLength = parseInt(pdu.slice(cursor, cursor+2), 16).toString(10);</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(udhi) { //User-Data-Header-Indicator: means there's some User-Data-Header.</span>
+<span class="cstat-no" title="statement not covered">        var udhLength = pdu.slice(cursor, cursor+2);</span>
+<span class="cstat-no" title="statement not covered">        var iei = pdu.slice(cursor+2, cursor+4);</span>
+<span class="cstat-no" title="statement not covered">        var headerLength, referenceNumber, parts, currentPart;</span>
+<span class="cstat-no" title="statement not covered">        if(iei == "00") { //Concatenated sms.</span>
+<span class="cstat-no" title="statement not covered">            headerLength = pdu.slice(cursor+4, cursor+6);</span>
+<span class="cstat-no" title="statement not covered">            referenceNumber = pdu.slice(cursor+6, cursor+8);</span>
+<span class="cstat-no" title="statement not covered">            parts = pdu.slice(cursor+8, cursor+10);</span>
+<span class="cstat-no" title="statement not covered">            currentPart = pdu.slice(cursor+10, cursor+12);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(iei == "08") { //Concatenaded sms with a two-bytes reference number</span>
+<span class="cstat-no" title="statement not covered">            headerLength = pdu.slice(cursor+4, cursor+6);</span>
+<span class="cstat-no" title="statement not covered">            referenceNumber = pdu.slice(cursor+6, cursor+10);</span>
+<span class="cstat-no" title="statement not covered">            parts = pdu.slice(cursor+10, cursor+12);</span>
+<span class="cstat-no" title="statement not covered">            currentPart = pdu.slice(cursor+12, cursor+14);</span>
+        }
+&nbsp;
+        /*if(iei == '00')
+            cursor += (udhLength-2)*4;
+        else if(iei == '08')
+            cursor += ((udhLength-2)*4)+2;
+        else
+            cursor += (udhLength-2)*2;*/
+<span class="cstat-no" title="statement not covered">        cursor = cursor + (parseInt(udhLength, 16) + 1) * 2;</span>
+    }
+<span class="cstat-no" title="statement not covered">    if(obj.encoding === '16bit')</span>
+<span class="cstat-no" title="statement not covered">        var text = pduParser.decode16Bit(pdu.slice(cursor), dataLength);</span>
+    else <span class="cstat-no" title="statement not covered">if(obj.encoding === '7bit')</span>
+<span class="cstat-no" title="statement not covered">        if (udhi &amp;&amp; iei=='00') <span class="cstat-no" title="statement not covered">var text = pduParser.decode7Bit(pdu.slice(cursor), dataLength-7, 1); </span>//If iei ==0, then there is some unpadding to do</span>
+        else <span class="cstat-no" title="statement not covered">if (udhi &amp;&amp; iei=='08') <span class="cstat-no" title="statement not covered">var text = pduParser.decode7Bit(pdu.slice(cursor), dataLength-8); </span>//If no udhi or iei = 08 then no unpadding to do</span>
+        else <span class="cstat-no" title="statement not covered">var text = pduParser.decode7Bit(pdu.slice(cursor), dataLength);</span>
+    else <span class="cstat-no" title="statement not covered">if(obj.encoding === '8bit')</span>
+<span class="cstat-no" title="statement not covered">        var text = ''; </span>//TODO
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.text = text;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(udhi) {</span>
+<span class="cstat-no" title="statement not covered">        obj['udh'] = {</span>
+            'length' : udhLength,
+            'iei' : iei,
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(iei == '00' || iei == '08') {</span>
+<span class="cstat-no" title="statement not covered">            obj['udh']['reference_number'] = referenceNumber;</span>
+<span class="cstat-no" title="statement not covered">            obj['udh']['parts'] = parseInt(parts);</span>
+<span class="cstat-no" title="statement not covered">            obj['udh']['current_part'] = parseInt(currentPart);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return obj;</span>
+}
+&nbsp;
+pduParser.detectEncoding = <span class="fstat-no" title="function not covered">function(dataCodingScheme) {</span>
+<span class="cstat-no" title="statement not covered">    if (typeof dataCodingScheme === 'string') <span class="cstat-no" title="statement not covered">dataCodingScheme = parseInt(dataCodingScheme, 16);</span></span>
+<span class="cstat-no" title="statement not covered">    var binary = ('00000000'+(dataCodingScheme.toString(2))).slice(-8);</span>
+<span class="cstat-no" title="statement not covered">    if(binary == '00000000')</span>
+<span class="cstat-no" title="statement not covered">        return '7bit';</span>
+&nbsp;
+    // if(binary.slice(0, 2) === '00') {
+<span class="cstat-no" title="statement not covered">        var compressed = binary.slice(2, 1) === '1';</span>
+<span class="cstat-no" title="statement not covered">        var bitsHaveMeaning = binary.slice(3, 1) === '1';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(binary.slice(4,6) === '00')</span>
+<span class="cstat-no" title="statement not covered">            return '7bit';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(binary.slice(4,6) === '01')</span>
+<span class="cstat-no" title="statement not covered">            return '8bit';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(binary.slice(4,6) === '10')</span>
+<span class="cstat-no" title="statement not covered">            return '16bit';</span>
+    // }
+}
+&nbsp;
+pduParser.decode16Bit = <span class="fstat-no" title="function not covered">function(data, length) {</span>
+    //We are getting ucs2 characters.
+<span class="cstat-no" title="statement not covered">    var ucs2 = '';</span>
+<span class="cstat-no" title="statement not covered">    for(var i = 0;i&lt;=data.length-1;i=i+4) {</span>
+<span class="cstat-no" title="statement not covered">        ucs2 += String.fromCharCode("0x"+data[i]+data[i+1]+data[i+2]+data[i+3]);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return ucs2;</span>
+}
+&nbsp;
+pduParser.deSwapNibbles = <span class="fstat-no" title="function not covered">function(nibbles) {</span>
+<span class="cstat-no" title="statement not covered">    var out = '';</span>
+<span class="cstat-no" title="statement not covered">    for(var i = 0; i&lt; nibbles.length; i=i+2) {</span>
+<span class="cstat-no" title="statement not covered">        if(nibbles[i] === 'F') //Dont consider trailing F.</span>
+<span class="cstat-no" title="statement not covered">            out += parseInt(nibbles[i+1], 16).toString(10);</span>
+        else
+<span class="cstat-no" title="statement not covered">            out += parseInt(nibbles[i+1], 16).toString(10)+parseInt(nibbles[i], 16).toString(10);</span>
+    }
+<span class="cstat-no" title="statement not covered">    return out;</span>
+}
+&nbsp;
+pduParser.decode7Bit = <span class="fstat-no" title="function not covered">function(code, length, unPadding) {</span>
+    //We are getting 'septeps'. We should decode them.
+<span class="cstat-no" title="statement not covered">    var binary = '';</span>
+<span class="cstat-no" title="statement not covered">    for(var i = 0; i&lt;code.length;i++)</span>
+<span class="cstat-no" title="statement not covered">        binary += ('0000'+parseInt(code.slice(i,i+1), 16).toString(2)).slice(-4);</span>
+&nbsp;
+    //This step is for 'unpadding' the padded data. If it has been encoded with 1 bit padding as it
+    //happens when the sender used a 7-bit message concatenation (cf http://mobiletidings.com/2009/02/18/combining-sms-messages/)
+<span class="cstat-no" title="statement not covered">    if (unPadding){</span>
+<span class="cstat-no" title="statement not covered">        var binary2 = '';</span>
+<span class="cstat-no" title="statement not covered">        binary = binary + '00000000';</span>
+<span class="cstat-no" title="statement not covered">        for (var i=0; i&lt;binary.length/8 - 1 ; i++)</span>
+        {
+<span class="cstat-no" title="statement not covered">            binary2 += (binary.slice((i+1)*8+(8-unPadding), (i+2)*8) + binary.slice(i*8,i*8+(8-unPadding)));</span>
+        }
+<span class="cstat-no" title="statement not covered">        binary = binary2;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var bin = Array();</span>
+<span class="cstat-no" title="statement not covered">    var cursor = 0;</span>
+<span class="cstat-no" title="statement not covered">    var fromPrevious = '';</span>
+<span class="cstat-no" title="statement not covered">    var i = 0;</span>
+<span class="cstat-no" title="statement not covered">    while(binary[i]) {</span>
+<span class="cstat-no" title="statement not covered">        var remaining = 7 - fromPrevious.length;</span>
+<span class="cstat-no" title="statement not covered">        var toNext = 8 - remaining;</span>
+<span class="cstat-no" title="statement not covered">        bin[i] = binary.slice(cursor+toNext, cursor+toNext+remaining) + fromPrevious;</span>
+<span class="cstat-no" title="statement not covered">        var fromPrevious = binary.slice(cursor, cursor+toNext);</span>
+<span class="cstat-no" title="statement not covered">        if(toNext === 8)</span>
+<span class="cstat-no" title="statement not covered">            fromPrevious = '';</span>
+        else
+<span class="cstat-no" title="statement not covered">            cursor += 8;</span>
+<span class="cstat-no" title="statement not covered">        i++;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var ascii = '';</span>
+<span class="cstat-no" title="statement not covered">    var esc = false; </span>//last character was a ESC
+<span class="cstat-no" title="statement not covered">    for(var i=0; i&lt;length; i++){</span>
+<span class="cstat-no" title="statement not covered">        var codeNum = parseInt(bin[i], 2);</span>
+<span class="cstat-no" title="statement not covered">        if (codeNum == 0x1B){</span>
+<span class="cstat-no" title="statement not covered">            esc = true;</span>
+<span class="cstat-no" title="statement not covered">            continue;</span>
+        }
+<span class="cstat-no" title="statement not covered">        if (esc)</span>
+<span class="cstat-no" title="statement not covered">            ascii += sevenBitEsc[codeNum];</span>
+        else
+<span class="cstat-no" title="statement not covered">            ascii += sevenBitDefault[codeNum];</span>
+<span class="cstat-no" title="statement not covered">        esc = false;</span>
+    }
+<span class="cstat-no" title="statement not covered">    return ascii;</span>
+}
+&nbsp;
+pduParser.encode7Bit = <span class="fstat-no" title="function not covered">function(inTextNumberArray, paddingBits)</span>
+{
+    //as explained here http://mobiletidings.com/2009/07/06/how-to-pack-gsm7-into-septets/
+<span class="cstat-no" title="statement not covered">    var paddingBits = paddingBits || 0;</span>
+<span class="cstat-no" title="statement not covered">    var bits = 0;</span>
+<span class="cstat-no" title="statement not covered">    var out = "";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(paddingBits)</span>
+        {
+<span class="cstat-no" title="statement not covered">            bits = 7 - paddingBits;</span>
+<span class="cstat-no" title="statement not covered">            var octet = (inTextNumberArray[0] &lt;&lt; (7 - bits)) % 256</span>
+<span class="cstat-no" title="statement not covered">            out += ('00' + octet.toString(16)).slice(-2);</span>
+<span class="cstat-no" title="statement not covered">            bits++;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for(var i = 0; i &lt; inTextNumberArray.length; i++ )</span>
+    {
+<span class="cstat-no" title="statement not covered">        if( bits == 7 )</span>
+        {
+<span class="cstat-no" title="statement not covered">            bits = 0;</span>
+<span class="cstat-no" title="statement not covered">            continue;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var octet = (inTextNumberArray[i] &amp; 0x7f) &gt;&gt; bits;</span>
+<span class="cstat-no" title="statement not covered">        if( i &lt; inTextNumberArray.length - 1 )</span>
+            {<span class="cstat-no" title="statement not covered">octet |= (inTextNumberArray[i + 1] &lt;&lt; (7 - bits))%256;}</span>
+<span class="cstat-no" title="statement not covered">        out += ('00' + octet.toString(16)).slice(-2);</span>
+<span class="cstat-no" title="statement not covered">        bits++;</span>
+    }
+<span class="cstat-no" title="statement not covered">    return out;</span>
+}
+&nbsp;
+pduParser.encode16Bit = <span class="fstat-no" title="function not covered">function(inTextNumberArray) {</span>
+<span class="cstat-no" title="statement not covered">    var out = '';</span>
+<span class="cstat-no" title="statement not covered">    for(var i = 0; i&lt;inTextNumberArray.length;i++) {</span>
+<span class="cstat-no" title="statement not covered">        out += ('0000'+(inTextNumberArray[i].toString(16))).slice(-4);</span>
+    }
+<span class="cstat-no" title="statement not covered">    return out;</span>
+}
+&nbsp;
+pduParser.messageToNumberArray = <span class="fstat-no" title="function not covered">function(message) //sp</span>
+{
+    //7bit GSM encoding according to GSM_03.38 character set http://en.wikipedia.org/wiki/GSM_03.38
+<span class="cstat-no" title="statement not covered">    res = [];</span>
+<span class="cstat-no" title="statement not covered">    for (var k=0; k&lt;message.text.length; k++)</span>
+    {
+<span class="cstat-no" title="statement not covered">        if (message.encoding == '7bit'){</span>
+<span class="cstat-no" title="statement not covered">            var character = message.text[k];</span>
+<span class="cstat-no" title="statement not covered">            for(var i=0;i&lt;sevenBitDefault.length;i++)</span>
+            {
+<span class="cstat-no" title="statement not covered">                if(sevenBitDefault[i] == character)</span>
+<span class="cstat-no" title="statement not covered">                    res.push(i);</span>
+<span class="cstat-no" title="statement not covered">                if (sevenBitEsc[i] == character){</span>
+<span class="cstat-no" title="statement not covered">                    res.push(0x1B); </span>//escape character
+<span class="cstat-no" title="statement not covered">                    res.push(i);</span>
+                }
+            }
+        }
+        else <span class="cstat-no" title="statement not covered">if (message.encoding == '16bit')</span>
+<span class="cstat-no" title="statement not covered">            res.push(message.text.charCodeAt(k));</span>
+    }
+<span class="cstat-no" title="statement not covered">    return res;</span>
+};
+&nbsp;
+/**
+ * Encodes message into PDU format
+ * http://www.developershome.com/sms/cmgsCommand4.asp
+ * Possible message values:
+ *  smsc - SMS center to use (MSISDN) (default:use modem's default SMSC)
+ *  smsc_type - SMS center type (0x81 for international and local, 0x91 for international format only) (default:0x81)
+ *  receiver - Receiver of the SMS message
+ *  receiver_type - type of the receiver's MSISDN (same as smsc_type) (default:0x81)
+ *  text - text of the short message
+ *  encoding - '7bit' or '16bit' (UCS-2)
+ *  request_status - boolean, true to request delivery status
+ */
+pduParser.generate = <span class="fstat-no" title="function not covered">function(message) {</span>
+<span class="cstat-no" title="statement not covered">    var smsc = '';</span>
+<span class="cstat-no" title="statement not covered">    var smscPartLength = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	if (message.smsc!==undefined){</span>
+<span class="cstat-no" title="statement not covered">        if (message.smsc_type!==undefined &amp;&amp; (message.smsc_type==0x81 || message.smsc_type==0x91)){</span>
+<span class="cstat-no" title="statement not covered">            smsc += message.smsc_type.toString (16);</span>
+        } else {
+<span class="cstat-no" title="statement not covered">            smsc += '81';</span>
+        }
+<span class="cstat-no" title="statement not covered">        smsc += this.swapNibbles(message.smsc);</span>
+<span class="cstat-no" title="statement not covered">        var smsc_length = octetLength(smsc);</span>
+<span class="cstat-no" title="statement not covered">        smsc = smsc_length + smsc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        smsc = '00';</span>
+    }
+<span class="cstat-no" title="statement not covered">    var pdu = smsc;</span>
+<span class="cstat-no" title="statement not covered">    smscPartLength = smsc.length;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var parts = 1;</span>
+<span class="cstat-no" title="statement not covered">    var inTextNumberArray = this.messageToNumberArray(message);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(message.encoding === '16bit' &amp;&amp; inTextNumberArray.length &gt; 70)</span>
+<span class="cstat-no" title="statement not covered">        parts = inTextNumberArray.length / 66;</span>
+&nbsp;
+    else <span class="cstat-no" title="statement not covered">if(message.encoding === '7bit' &amp;&amp; inTextNumberArray.length &gt; 160)</span>
+<span class="cstat-no" title="statement not covered">        parts = inTextNumberArray.length / 153;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    parts = Math.ceil(parts);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    TPMTI  = 1&lt;&lt;0; </span>//(2 bits) type msg, 1=submit by MS
+<span class="cstat-no" title="statement not covered">    TPRD   = 1&lt;&lt;2; </span>//(1 bit) reject duplicates
+<span class="cstat-no" title="statement not covered">    TPVPF  = 1&lt;&lt;3; </span>//(2 bits) validaty f. : 0=not pres, 1=enhanc,2=relative,3=absolute
+<span class="cstat-no" title="statement not covered">    TPSRR  = 1&lt;&lt;5; </span>//(1 bit) want status reply
+<span class="cstat-no" title="statement not covered">    TPUDHI = 1&lt;&lt;6; </span>//(1 bit) 1=header+data, 0=only data
+<span class="cstat-no" title="statement not covered">    TPRP   = 1&lt;&lt;7; </span>//(1 bit) reply-path
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var submit = TPMTI;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(parts &gt; 1) //UDHI</span>
+<span class="cstat-no" title="statement not covered">        submit = submit | TPUDHI;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (message.request_status!==undefined &amp;&amp; message.request_status)</span>
+<span class="cstat-no" title="statement not covered">    	submit = submit | TPSRR;</span>
+<span class="cstat-no" title="statement not covered">    pdu += ('00'+submit.toString(16)).slice(-2);</span>
+<span class="cstat-no" title="statement not covered">    pdu += '00'; </span>//Reference Number;
+<span class="cstat-no" title="statement not covered">    var receiverSize = ('00'+(parseInt(message.receiver.length, 10).toString(16))).slice(-2);</span>
+<span class="cstat-no" title="statement not covered">    var receiver = pduParser.swapNibbles(message.receiver);</span>
+&nbsp;
+	//Destination MSISDN type
+<span class="cstat-no" title="statement not covered">    var receiverType;</span>
+<span class="cstat-no" title="statement not covered">    if (message.receiver_type !== undefined &amp;&amp; (message.receiver_type === 0x81 || message.receiver_type === 0x91)){</span>
+<span class="cstat-no" title="statement not covered">        receiverType = message.receiver_type.toString(16);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        receiverType = 81;</span>
+    }
+<span class="cstat-no" title="statement not covered">    pdu += receiverSize.toString(16) + receiverType + receiver;</span>
+<span class="cstat-no" title="statement not covered">    pdu += '00'; </span>//TODO TP-PID
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if(message.encoding === '16bit')</span>
+<span class="cstat-no" title="statement not covered">        pdu += '08';</span>
+    else <span class="cstat-no" title="statement not covered">if(message.encoding === '7bit')</span>
+<span class="cstat-no" title="statement not covered">        pdu += '00';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var pdus = new Array();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var csms = randomHexa(2); </span>// CSMS allows to give a reference to a concatenated message
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for(var i=0; i&lt; parts; i++) {</span>
+<span class="cstat-no" title="statement not covered">        pdus[i] = pdu;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if(message.encoding === '16bit') {</span>
+            /* If there are more than one messages to be sent, we are going to have to put some UDH. Then, we would have space only
+             * for 66 UCS2 characters instead of 70 */
+<span class="cstat-no" title="statement not covered">            if(parts === 1)</span>
+<span class="cstat-no" title="statement not covered">                var length = 70;</span>
+            else
+<span class="cstat-no" title="statement not covered">                var length = 66;</span>
+&nbsp;
+        } else <span class="cstat-no" title="statement not covered">if(message.encoding === '7bit') {</span>
+            /* If there are more than one messages to be sent, we are going to have to put some UDH. Then, we would have space only
+             * for 153 ASCII characters instead of 160 */
+<span class="cstat-no" title="statement not covered">            if(parts === 1)</span>
+<span class="cstat-no" title="statement not covered">                var length = 160;</span>
+            else
+<span class="cstat-no" title="statement not covered">                var length = 153;</span>
+        } else <span class="cstat-no" title="statement not covered">if(message.encoding === '8bit') {</span>
+&nbsp;
+        }
+<span class="cstat-no" title="statement not covered">        var text = inTextNumberArray.slice(i*length, (i*length)+length);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var user_data;</span>
+<span class="cstat-no" title="statement not covered">        if(message.encoding === '16bit') {</span>
+<span class="cstat-no" title="statement not covered">            user_data = pduParser.encode16Bit(text);</span>
+<span class="cstat-no" title="statement not covered">            var size = (user_data.length / 2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if(parts &gt; 1)</span>
+<span class="cstat-no" title="statement not covered">                size += 6; </span>//6 is the number of data headers we append.
+&nbsp;
+        } else <span class="cstat-no" title="statement not covered">if(message.encoding === '7bit') {</span>
+<span class="cstat-no" title="statement not covered">            if(parts &gt; 1){</span>
+<span class="cstat-no" title="statement not covered">                user_data = pduParser.encode7Bit(text,1);</span>
+<span class="cstat-no" title="statement not covered">                var size = 7 + text.length;</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered">                user_data = pduParser.encode7Bit(text);</span>
+<span class="cstat-no" title="statement not covered">                var size = text.length;</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        pdus[i] += ('00'+parseInt(size).toString(16)).slice(-2);</span>
+&nbsp;
+        // UDHI control header for concaterating message's parts
+<span class="cstat-no" title="statement not covered">        if(parts &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] += '05';</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] += '00';</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] += '03';</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] +=  csms;</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] += ('00'+parts.toString(16)).slice(-2);</span>
+<span class="cstat-no" title="statement not covered">            pdus[i] += ('00'+(i+1).toString(16)).slice(-2);</span>
+        }
+<span class="cstat-no" title="statement not covered">        pdus[i] += user_data;</span>
+<span class="cstat-no" title="statement not covered">        pdus[i] = {</span>
+        	tpdu_length: (pdus[i].length - smscPartLength)/2,
+        	smsc_tpdu: pdus[i].toUpperCase()
+        };
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return pdus;</span>
+}
+&nbsp;
+&nbsp;
+pduParser.swapNibbles = <span class="fstat-no" title="function not covered">function(nibbles) {</span>
+<span class="cstat-no" title="statement not covered">    var out = '';</span>
+<span class="cstat-no" title="statement not covered">    for(var i = 0; i&lt; nibbles.length; i=i+2) {</span>
+<span class="cstat-no" title="statement not covered">        if(typeof(nibbles[i+1]) === 'undefined') // Add a trailing F.</span>
+<span class="cstat-no" title="statement not covered">            out += 'F'+parseInt(nibbles[i], 16).toString(10);</span>
+        else
+<span class="cstat-no" title="statement not covered">            out += parseInt(nibbles[i+1], 16).toString(10)+parseInt(nibbles[i], 16).toString(10);</span>
+    }
+<span class="cstat-no" title="statement not covered">    return out;</span>
+}
+&nbsp;
+pduParser.parseStatusReport = <span class="fstat-no" title="function not covered">function(pdu, smsc_parsed) {</span>
+<span class="cstat-no" title="statement not covered">    var cursor = 0;</span>
+<span class="cstat-no" title="statement not covered">    var obj = smsc_parsed;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var header = parseInt(pdu.slice(cursor,cursor+2));</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+    //TODO: maybe SMS-COMMAND here
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.reference = parseInt(pdu.slice(cursor,cursor+2), 16);</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var senderSize = parseInt(pdu.slice(cursor,cursor+2), 16);</span>
+<span class="cstat-no" title="statement not covered">    if(senderSize % 2 === 1)</span>
+<span class="cstat-no" title="statement not covered">        senderSize++;</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.sender_type = parseInt(pdu.slice(cursor,cursor+2));</span>
+<span class="cstat-no" title="statement not covered">    cursor += 2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.sender = pduParser.deSwapNibbles(pdu.slice(cursor, cursor+senderSize));</span>
+<span class="cstat-no" title="statement not covered">    cursor += senderSize;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.smsc_ts = parseTS(pdu.slice(cursor, cursor+14));</span>
+<span class="cstat-no" title="statement not covered">    cursor += 14;</span>
+<span class="cstat-no" title="statement not covered">    obj.discharge_ts = parseTS(pdu.slice(cursor, cursor+14));</span>
+<span class="cstat-no" title="statement not covered">    cursor += 14;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    obj.status = pdu.slice(cursor, cursor+2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return obj;</span>
+}
+/**
+ * Parses SMSC part of the PDU
+ */
+<span class="fstat-no" title="function not covered">function parseSMSCPart (pdu){</span>
+	//Cursor points to the last octet we've read.
+<span class="cstat-no" title="statement not covered">    var cursor = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var buffer = new Buffer(pdu.slice(0,4), 'hex');</span>
+<span class="cstat-no" title="statement not covered">    var smscSize = buffer[0];</span>
+<span class="cstat-no" title="statement not covered">    var smscType = buffer[1].toString(16);</span>
+<span class="cstat-no" title="statement not covered">    var smscNum  = pduParser.deSwapNibbles(pdu.slice(4, smscSize*2+2));</span>
+<span class="cstat-no" title="statement not covered">    return {</span>
+    	'smsc' : smscNum,
+    	'smsc_type' : smscType,
+    	'length' : smscSize*2+2
+    };
+}
+/**
+ * Parses timestamp from PDU
+ */
+<span class="fstat-no" title="function not covered">function parseTS (ts){</span>
+<span class="cstat-no" title="statement not covered">	var t = pduParser.deSwapNibbles (ts);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var time = new Date;</span>
+<span class="cstat-no" title="statement not covered">    time.setFullYear(2000+parseInt (t.substr (0,2)));</span>
+<span class="cstat-no" title="statement not covered">    time.setMonth(parseInt (t.substr(2,2))-1);</span>
+<span class="cstat-no" title="statement not covered">    time.setDate(parseInt (t.substr(4,2)));</span>
+<span class="cstat-no" title="statement not covered">    time.setHours(parseInt (t.substr(6,2)));</span>
+<span class="cstat-no" title="statement not covered">    time.setMinutes(parseInt (t.substr(8,2)));</span>
+<span class="cstat-no" title="statement not covered">    time.setSeconds(parseInt (t.substr(10,2)));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var firstTimezoneOctet = parseInt(t.substr(12,1));</span>
+<span class="cstat-no" title="statement not covered">    var binary = ("0000"+firstTimezoneOctet.toString(2)).slice(-4);</span>
+<span class="cstat-no" title="statement not covered">    var factor = binary.slice(0,1) === '1' ? 1 : -1;</span>
+<span class="cstat-no" title="statement not covered">    var binary = '0'+binary.slice(1, 4);</span>
+<span class="cstat-no" title="statement not covered">    var firstTimezoneOctet = parseInt(binary, 2).toString(10);</span>
+<span class="cstat-no" title="statement not covered">    var timezoneDiff = parseInt(firstTimezoneOctet + t.substr(13, 1));</span>
+<span class="cstat-no" title="statement not covered">    var time = new Date(time.getTime() + (timezoneDiff * 15 * 60000 * factor) - time.getTimezoneOffset()*60000);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	return time;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function TP_MTI_To_String (tp_mti){</span>
+<span class="cstat-no" title="statement not covered">	switch (tp_mti){</span>
+		case '00': <span class="cstat-no" title="statement not covered">return 'SMS-DELIVER';</span>
+		case '01': <span class="cstat-no" title="statement not covered">return 'SMS-SUBMIT';</span>
+		case '10': <span class="cstat-no" title="statement not covered">return 'SMS-STATUS-REPORT';</span>
+		default: <span class="cstat-no" title="statement not covered">return 'unknown';</span>
+	}
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function randomHexa(size)</span>
+{
+<span class="cstat-no" title="statement not covered">    var text = "";</span>
+<span class="cstat-no" title="statement not covered">    var possible = "0123456789ABCDEF";</span>
+<span class="cstat-no" title="statement not covered">    for( var i=0; i &lt; size; i++ )</span>
+<span class="cstat-no" title="statement not covered">        text += possible.charAt(Math.floor(Math.random() * possible.length));</span>
+<span class="cstat-no" title="statement not covered">    return text;</span>
+}
+&nbsp;
+/**
+ * Return length of the octet
+ */
+<span class="fstat-no" title="function not covered">function octetLength (str) {</span>
+<span class="cstat-no" title="statement not covered">    var len = (str.toString().length/2).toString(16).toUpperCase();</span>
+<span class="cstat-no" title="statement not covered">    if (len.length==1) <span class="cstat-no" title="statement not covered">len = '0' + len;</span></span>
+<span class="cstat-no" title="statement not covered">    return len;</span>
+};
+&nbsp;
+/**
+ * Encodes ussd request to PDU
+ */
+pduParser.ussdEncode = <span class="fstat-no" title="function not covered">function (ussd) {</span>
+<span class="cstat-no" title="statement not covered">	var arr = this.messageToNumberArray ({text:ussd,encoding:'7bit'});</span>
+<span class="cstat-no" title="statement not covered">	return this.encode7Bit(arr).toUpperCase();</span>
+};
+&nbsp;
+module.exports = pduParser;
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Fri Apr 21 2017 13:06:51 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
